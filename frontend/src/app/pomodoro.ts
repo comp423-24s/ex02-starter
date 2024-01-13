@@ -19,10 +19,17 @@ export class PomodoroTimer {
     this.state = PomodoroTimerState.IDLE;
   }
 
-  restart() {
+  start() {
+    this.reset();
     this.state = PomodoroTimerState.WORKING;
-    this.updateCountdown(this.timerLength);
     this.startCountdown();
+  }
+
+  reset() {
+    clearInterval(this.timerId);
+    this.updateCountdown(this.timerLength);
+    this.previousState = PomodoroTimerState.IDLE;
+    this.state = PomodoroTimerState.IDLE;
   }
 
   resume() {
