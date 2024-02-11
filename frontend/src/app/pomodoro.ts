@@ -74,7 +74,7 @@ export class PomodoroTimer {
   }
 }
 
-enum PomodoroTimerState {
+export enum PomodoroTimerState {
   IDLE,
   WORKING,
   BREAK
