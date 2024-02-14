@@ -36,6 +36,8 @@ export class TimerWidget {
 
   /** Deletes the current timer */
   deleteTimer() {
-    this.productivityService.deleteTimer(this.timerData.id);
+    this.productivityService.deleteTimer(this.timerData.id).subscribe((_) => {
+      this.productivityService.getTimers();
+    });
   }
 }

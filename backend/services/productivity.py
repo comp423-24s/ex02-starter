@@ -11,6 +11,7 @@ __author__ = "Ajay Gandecha"
 __copyright__ = "Copyright 2024"
 __license__ = "MIT"
 
+_timer_id = 1
 _timers: dict[int, PomodoroTimer] = {}
 """Private module data simulating a simple key-value store where keys are the timer ID and values are timer objects. Do not reference externally."""
 
@@ -24,12 +25,17 @@ class ProductivityService:
         global _timers
         return _timers.values()
 
-    def create_timer(self, timer: PomodoroTimer) -> PomodoroTimer:
+    def get_timer(self, timer_id: int) -> list[PomodoroTimer]:
         global _timers
-        if timer.id in _timers:
-            raise Exception(f"Invalid ID {timer.id}: ID already exists.")
+        if timer_id not in _timers:
+            raise Exception(f"Invalid ID {timer_id}: Timer does not exist.")
+        return _timers[timer_id]
 
-        _timers[timer.id] = timer
+    def create_timer(self, timer: PomodoroTimer) -> PomodoroTimer:
+        global _timers, _timer_id
+        timer.id = _timer_id
+        _timers[_timer_id] = timer
+        _timer_id += 1
         return timer
 
     def update_timer(self, timer: PomodoroTimer) -> PomodoroTimer:

@@ -1,5 +1,6 @@
   .mat-mdc-card {
     margin: 0;
+    margin-top: 8px;
     max-width: 640px;
   }
   

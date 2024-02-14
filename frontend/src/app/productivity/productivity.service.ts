@@ -1,60 +1,65 @@
 import { Injectable } from '@angular/core';
-import { TimerData } from './timerdata';
+import { TimerData, TimerResponse } from './timerdata';
 import { PomodoroTimer } from '../pomodoro';
+import { Observable, ReplaySubject, map } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductivityService {
-  nextId = 1;
-  data: TimerData[] = [];
+  private timers: ReplaySubject<TimerData[]> = new ReplaySubject(1);
+  timers$: Observable<TimerData[]> = this.timers.asObservable();
 
-  constructor() {}
-
-  getTimer(id: number) {
-    return this.data.find((t) => t.id == id);
+  constructor(protected http: HttpClient) {
+    this.timers.next([]);
   }
 
-  createTimer(
-    name: string,
-    description: string,
-    timerLength: number,
-    breakLength: number
-  ) {
-    let newTimer = new PomodoroTimer(timerLength, breakLength);
-    newTimer.reset();
-
-    this.data.push({
-      id: this.nextId,
-      name: name,
-      description: description,
-      timer: newTimer
-    });
-    this.nextId += 1;
+  getTimers() {
+    this.http
+      .get<TimerResponse[]>('/api/productivity')
+      .pipe(
+        map((responses) =>
+          responses.map((response) => this.timerResponseToData(response))
+        )
+      )
+      .subscribe((timers) => this.timers.next(timers));
   }
 
-  editTimer(
-    id: number,
-    name: string,
-    description: string,
-    timerLength: number,
-    breakLength: number
-  ) {
-    let timerIndex = this.data.findIndex((t) => t.id == id);
+  getTimer(id: number): Observable<TimerData> {
+    return this.http
+      .get<TimerResponse>('/api/productivity/' + id)
+      .pipe(map(this.timerResponseToData));
+  }
 
-    if (timerIndex == -1) {
-      console.log('Cannot edit a timer that does not exist.');
-      return;
-    }
+  createTimer(request: TimerResponse): Observable<TimerData> {
+    return this.http
+      .post<TimerResponse>('/api/productivity', request)
+      .pipe(map(this.timerResponseToData));
+  }
 
-    this.data[timerIndex].name = name;
-    this.data[timerIndex].description = description;
-    let newTimer = new PomodoroTimer(timerLength, breakLength);
-    newTimer.reset();
-    this.data[timerIndex].timer = newTimer;
+  editTimer(request: TimerResponse): Observable<TimerData> {
+    return this.http
+      .put<TimerResponse>('/api/productivity', request)
+      .pipe(map(this.timerResponseToData));
   }
 
   deleteTimer(id: number) {
-    this.data = this.data.filter((t) => t.id != id);
+    return this.http.delete('/api/productivity/' + id);
+  }
+
+  timerResponseToData(response: TimerResponse): TimerData {
+    let newTimer = new PomodoroTimer(
+      response.timer_length,
+      response.break_length
+    );
+    newTimer.reset();
+
+    return {
+      id: response.id!,
+      name: response.name,
+      description: response.description,
+      timer: newTimer
+    };
   }
 }

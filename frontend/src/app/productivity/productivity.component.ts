@@ -26,5 +26,7 @@ export class ProductivityComponent {
   constructor(
     public productivityService: ProductivityService,
     public router: Router
-  ) {}
+  ) {
+    this.productivityService.getTimers();
+  }
 }

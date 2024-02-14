@@ -58,12 +58,13 @@ export class TimerEditorComponent {
     // If the timer is not new, set existing timer data and update the forms.
     if (!this.isNew) {
       this.id = route.snapshot.params['pomo_id'];
-      let timerData = productivityService.getTimer(this.id)!;
-      this.timerForm.setValue({
-        name: timerData.name,
-        description: timerData.description,
-        timerLength: timerData.timer.timerLength,
-        breakLength: timerData.timer.breakLength
+      productivityService.getTimer(this.id).subscribe((timerData) => {
+        this.timerForm.setValue({
+          name: timerData.name,
+          description: timerData.description,
+          timerLength: timerData.timer.timerLength,
+          breakLength: timerData.timer.breakLength
+        });
       });
     }
   }
@@ -74,25 +75,33 @@ export class TimerEditorComponent {
     if (this.timerForm.valid) {
       // If the timer is new, create it.
       if (this.isNew) {
-        this.productivityService.createTimer(
-          this.name.value ?? '',
-          this.description.value ?? '',
-          this.timerLength.value ?? 0,
-          this.breakLength.value ?? 0
-        );
+        this.productivityService
+          .createTimer({
+            id: null,
+            name: this.name.value ?? '',
+            description: this.description.value ?? '',
+            timer_length: this.timerLength.value ?? 0,
+            break_length: this.breakLength.value ?? 0
+          })
+          .subscribe((_) => {
+            // Navigate back to the productivity page once the operation is complete.
+            this.router.navigate(['/productivity/']);
+          });
       } else {
         // Otherwise, update it.
-        this.productivityService.editTimer(
-          this.id,
-          this.name.value ?? '',
-          this.description.value ?? '',
-          this.timerLength.value ?? 0,
-          this.breakLength.value ?? 0
-        );
+        this.productivityService
+          .editTimer({
+            id: this.id,
+            name: this.name.value ?? '',
+            description: this.description.value ?? '',
+            timer_length: this.timerLength.value ?? 0,
+            break_length: this.breakLength.value ?? 0
+          })
+          .subscribe((_) => {
+            // Navigate back to the productivity page once the operation is complete.
+            this.router.navigate(['/productivity/']);
+          });
       }
-
-      // Navigate back to the productivity page once the operation is complete.
-      this.router.navigate(['/productivity/']);
     } else {
       this.snackBar.open('Please enter values in the form correctly.', '', {
         duration: 2000

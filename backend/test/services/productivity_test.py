@@ -41,6 +41,21 @@ def test_add_timer_already_exists(productivity_service: ProductivityService):
         productivity_service.create_timer(second_timer)
 
 
+def test_get_timer(productivity_service: ProductivityService):
+    timer = PomodoroTimer(
+        id=1, name="Sample", description="Description", timer_length=10, break_length=5
+    )
+    productivity_service.create_timer(timer)
+    result = productivity_service.get_timer(timer.id)
+    assert result is not None
+    assert timer.id == result.id
+
+
+def test_get_timer_none_exists(productivity_service: ProductivityService):
+    with pytest.raises(Exception):
+        productivity_service.get_timer(1)
+
+
 def test_update_timer(productivity_service: ProductivityService):
     timer = PomodoroTimer(
         id=1, name="Sample", description="Description", timer_length=10, break_length=5

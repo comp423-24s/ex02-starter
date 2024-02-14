@@ -35,6 +35,22 @@ def get_timers(
     return productivity_service.get_timers()
 
 
+@api.get("/{id}", response_model=PomodoroTimer, tags=["Productivity"])
+def get_timer(
+    id: int,
+    productivity_service: ProductivityService = Depends(),
+) -> PomodoroTimer:
+    """
+    Get pomodoro timer.
+
+    Parameters:
+        id: ID of the timer to get
+        productivity_service: a valid ProductivityService
+    """
+
+    return productivity_service.get_timer(id)
+
+
 @api.post("", response_model=PomodoroTimer, tags=["Productivity"])
 def create_timer(
     timer: PomodoroTimer,

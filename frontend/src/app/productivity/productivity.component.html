@@ -1,19 +1,19 @@
 <mat-card appearance="outlined">
-  <div *ngIf="productivityService.data.length > 0; else notimers">
+  <div *ngIf="(productivityService.timers$ | async)!.length > 0; else notimers">
     <mat-card-header>
       <mat-card-title>My Timers</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <p>
-        You have {{ productivityService.data.length }} timer{{
-          productivityService.data.length !== 1 ? 's' : ''
+        You have {{ (productivityService.timers$ | async)!.length }} timer{{
+          (productivityService.timers$ | async)!.length !== 1 ? 's' : ''
         }}.
       </p>
 
       <!-- List of timer widgets -->
       <timer-widget
         [timerData]="timer"
-        *ngFor="let timer of productivityService.data" />
+        *ngFor="let timer of (productivityService.timers$ | async)!" />
     </mat-card-content>
   </div>
   <ng-template #notimers>

@@ -5,7 +5,7 @@ from pydantic import BaseModel
 
 
 class PomodoroTimer(BaseModel):
-    id: int
+    id: int | None
     name: str
     description: str
     timer_length: int
