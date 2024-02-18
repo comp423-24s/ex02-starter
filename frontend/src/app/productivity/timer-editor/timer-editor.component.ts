@@ -75,32 +75,9 @@ export class TimerEditorComponent {
     if (this.timerForm.valid) {
       // If the timer is new, create it.
       if (this.isNew) {
-        this.productivityService
-          .createTimer({
-            id: null,
-            name: this.name.value ?? '',
-            description: this.description.value ?? '',
-            timer_length: this.timerLength.value ?? 0,
-            break_length: this.breakLength.value ?? 0
-          })
-          .subscribe((_) => {
-            // Navigate back to the productivity page once the operation is complete.
-            this.router.navigate(['/productivity/']);
-          });
+        // TODO: Create a timer.
       } else {
-        // Otherwise, update it.
-        this.productivityService
-          .editTimer({
-            id: this.id,
-            name: this.name.value ?? '',
-            description: this.description.value ?? '',
-            timer_length: this.timerLength.value ?? 0,
-            break_length: this.breakLength.value ?? 0
-          })
-          .subscribe((_) => {
-            // Navigate back to the productivity page once the operation is complete.
-            this.router.navigate(['/productivity/']);
-          });
+        // TODO: Edit the existing timer.
       }
     } else {
       this.snackBar.open('Please enter values in the form correctly.', '', {

@@ -1,6 +1,5 @@
-"""Model for Pomodoro Timer data."""
+"""Pydantic Model for Pomodoro Timer data."""
 
-from datetime import datetime
 from pydantic import BaseModel
 
 

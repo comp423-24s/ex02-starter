@@ -16,90 +16,33 @@ openapi_tags = {
     "description": "Create, update, delete, and retrieve Pomodoro timers.",
 }
 
-
-@api.get("", response_model=list[PomodoroTimer], tags=["Productivity"])
-def get_timers(
-    productivity_service: ProductivityService = Depends(),
-) -> list[PomodoroTimer]:
-    """
-    Get all pomodoro timers.
-
-    Parameters:
-        productivity_service: a valid ProductivityService
-
-    Returns:
-        list[PomodoroTimer]: All pomodoro timers
-    """
-
-    # Return all pomodoro timers
-    return productivity_service.get_timers()
+# TODO: Implement the following API:
+# GET /api/productivity
+# Gets all pomodoro timers.
+# Expected return type: list[PomodoroTimer]
 
 
-@api.get("/{id}", response_model=PomodoroTimer, tags=["Productivity"])
-def get_timer(
-    id: int,
-    productivity_service: ProductivityService = Depends(),
-) -> PomodoroTimer:
-    """
-    Get pomodoro timer.
-
-    Parameters:
-        id: ID of the timer to get
-        productivity_service: a valid ProductivityService
-    """
-
-    return productivity_service.get_timer(id)
+# TODO: Implement the following API:
+# GET /api/productivity/{id}
+# Get a pomodoro timer by its ID.
+# Expected return type: PomodoroTimer
 
 
-@api.post("", response_model=PomodoroTimer, tags=["Productivity"])
-def create_timer(
-    timer: PomodoroTimer,
-    productivity_service: ProductivityService = Depends(),
-) -> PomodoroTimer:
-    """
-    Create pomodoro timer.
-
-    Parameters:
-        timer: a valid PomodoroTimer model
-        productivity_service: a valid ProductivityService
-
-    Returns:
-        PomodoroTimer: Created pomodoro timer
-    """
-
-    return productivity_service.create_timer(timer)
+# TODO: Implement the following API:
+# POST /api/productivity/
+# Creates a new pomodoro timer.
+# Note: This API will take in a request body. What type should this be?
+# Expected return type: PomodoroTimer
 
 
-@api.put("", response_model=PomodoroTimer, tags=["Productivity"])
-def update_timer(
-    timer: PomodoroTimer,
-    productivity_service: ProductivityService = Depends(),
-) -> PomodoroTimer:
-    """
-    Update pomodoro timer.
-
-    Parameters:
-        timer: a valid PomodoroTimer model
-        productivity_service: a valid ProductivityService
-
-    Returns:
-        PomodoroTimer: Updated pomodoro timer
-    """
-
-    return productivity_service.update_timer(timer)
+# TODO: Implement the following API:
+# PUT /api/productivity
+# Updates a pomodoro timer.
+# Note: This API will take in a request body. What type should this be?
+# Expected return type: PomodoroTimer
 
 
-@api.delete("/{id}", response_model=None, tags=["Productivity"])
-def delete_timer(
-    id: int,
-    productivity_service: ProductivityService = Depends(),
-) -> PomodoroTimer:
-    """
-    Delete pomodoro timer.
-
-    Parameters:
-        id: ID of the timer to delete
-        productivity_service: a valid ProductivityService
-    """
-
-    return productivity_service.delete_timer(id)
+# TODO: Implement the following API:
+# DELETE /api/productivity/{id}
+# Deletes a pomodoro timer.
+# Expected return type: PomodoroTimer

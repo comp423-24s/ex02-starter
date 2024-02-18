@@ -56,27 +56,7 @@ def test_get_timer_none_exists(productivity_service: ProductivityService):
         productivity_service.get_timer(1)
 
 
-def test_update_timer(productivity_service: ProductivityService):
-    timer = PomodoroTimer(
-        id=1, name="Sample", description="Description", timer_length=10, break_length=5
-    )
-    result = productivity_service.create_timer(timer)
-    before_length = len(productivity_service.get_timers())
-    result.break_length = 10
-    updated = productivity_service.update_timer(result)
-    after_length = len(productivity_service.get_timers())
-    assert updated is not None
-    assert updated.id == result.id == timer.id
-    assert updated.break_length == 10
-    assert before_length == after_length
-
-
-def test_update_timer_none_exists(productivity_service: ProductivityService):
-    timer = PomodoroTimer(
-        id=1, name="Sample", description="Description", timer_length=10, break_length=5
-    )
-    with pytest.raises(Exception):
-        updated = productivity_service.update_timer(timer)
+# TODO: Implement two tests for updating a timer.
 
 
 def test_delete_timer(productivity_service: ProductivityService):

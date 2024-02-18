@@ -27,7 +27,6 @@ export class ProductivityComponent {
     public productivityService: ProductivityService,
     public router: Router
   ) {
-    // Retrieves all timers and updates the service's `timers$` observable.
-    this.productivityService.getTimers();
+    // TODO: Retrieve all timers (which updates the service's `timers$` observable)
   }
 }

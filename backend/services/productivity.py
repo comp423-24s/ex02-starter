@@ -5,6 +5,7 @@ API of this exercise. Ultimately, functions like these will be backed by an actu
 storage system such as a relational database.
 """
 
+from fastapi import HTTPException
 from ..models.pomodorotimer import PomodoroTimer
 
 __author__ = "Ajay Gandecha"
@@ -42,11 +43,13 @@ class ProductivityService:
         Returns:
             PomodoroTimer: Timer with the matching ID.
         Raises:
-            Exception: Timer does not exist.
+            HTTPException: Timer does not exist.
         """
         global _timers
         if timer_id not in _timers:
-            raise Exception(f"Invalid ID {timer_id}: Timer does not exist.")
+            raise HTTPException(
+                status_code=404, detail=f"Invalid ID {timer_id}: Timer does not exist."
+            )
         return _timers[timer_id]
 
     def create_timer(self, timer: PomodoroTimer) -> PomodoroTimer:
@@ -67,19 +70,16 @@ class ProductivityService:
         """Modifies one timer in the data store.
 
         Args:
-            timer: Timer to modify.
+            timer: Data for a timer with modified values.
         Returns:
             PomodoroTimer: Updated timer.
         Raises:
-            Exception: Timer does not exist.
+            HTTPException: Timer does not exist.
         """
-        global _timers
-        if timer.id not in _timers:
-            raise Exception(
-                f"Invalid ID {timer.id}: Cannot edit a timer that does not exist."
-            )
-        _timers[timer.id] = timer
-        return timer
+        # TODO: Implement this service function. To do this successfully, you must:
+        # - Update the correct timer in the backend.
+        # - Throw the correct exception if the user tries to edit a timer that does not exist.
+        # - Return the updated timer.
 
     def delete_timer(self, timer_id: int) -> None:
         """Deletes one timer from the data store.
@@ -87,10 +87,12 @@ class ProductivityService:
         Args:
             timer_id: ID of the timer to delete.
         Raises:
-            Exception: Timer does not exist.
+            HTTPException: Timer does not exist.
         """
         global _timers
 
         if timer_id not in _timers:
-            raise Exception(f"Could not delete a timer that does not exist.")
+            raise HTTPException(
+                status_code=404, detail=f"Invalid ID {timer_id}: Timer does not exist."
+            )
         del _timers[timer_id]

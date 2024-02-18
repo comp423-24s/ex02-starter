@@ -10,7 +10,7 @@
 import { Injectable } from '@angular/core';
 import { TimerData, TimerResponse } from './timerdata';
 import { PomodoroTimer } from '../pomodoro';
-import { Observable, ReplaySubject, map } from 'rxjs';
+import { Observable, OperatorFunction, ReplaySubject, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -41,41 +41,83 @@ export class ProductivityService {
 
   /** Refreshes the internal `timer$` observable with the latest timer data from the API. */
   getTimers() {
-    this.http
-      .get<TimerResponse[]>('/api/productivity')
-      .pipe(
-        map((responses) =>
-          responses.map((response) => this.timerResponseToData(response))
-        )
-      )
-      .subscribe((timers) => this.timers.next(timers));
+    // TODO:
+    // - Get all TimerResponse objects by calling the GET /api/productivity API
+    // - Then, convert the data from TimerResponse objects to TimerData objects. using RxJS operators,
+    //    pass the resulting list through the `mapTimerResponseListToDataList` function.
+    // - Finally, update the internal timers$ observable by calling `this.timers.next(...)`.
+    // - Return the result.
   }
 
   /** Returns a single timer from the API as an observable.  */
   getTimer(id: number): Observable<TimerData> {
-    return this.http
-      .get<TimerResponse>('/api/productivity/' + id)
-      .pipe(map(this.timerResponseToData));
+    // TODO:
+    // - Get one TimerResponse object by calling the GET /api/productivity/{id} API
+    // - Then, convert the data from TimerResponse object to a TimerData object. using RxJS operators,
+    //    pass the resulting list through the `mapTimerResponseToData` function.
+    // - Return the result.
+
+    // Delete the line below once you complete your solution -
+    // This is a placeholder to prevent Angular from failing to build.
+    return new Observable();
   }
 
   /** Creates a new timer and returns the created timer from the API as an observable. */
   createTimer(request: TimerResponse): Observable<TimerData> {
-    return this.http
-      .post<TimerResponse>('/api/productivity', request)
-      .pipe(map(this.timerResponseToData));
+    // TODO:
+    // - Create one TimerResponse object by calling the POST /api/productivity/ API
+    // - Then, convert the data from TimerResponse object to a TimerData object. using RxJS operators,
+    //    pass the resulting list through the `mapTimerResponseToData` function.
+    // - Return the result.
+
+    // Delete the line below once you complete your solution -
+    // This is a placeholder to prevent Angular from failing to build.
+    return new Observable();
   }
 
   /** Edits a timer and returns the edited timer from the API as an observable. */
   editTimer(request: TimerResponse): Observable<TimerData> {
-    return this.http
-      .put<TimerResponse>('/api/productivity', request)
-      .pipe(map(this.timerResponseToData));
+    // TODO:
+    // - Create one TimerResponse object by calling the PUT /api/productivity/ API
+    // - Then, convert the data from TimerResponse object to a TimerData object. using RxJS operators,
+    //    pass the resulting list through the `mapTimerResponseToData` function.
+    // - Return the result.
+
+    // Delete the line below once you complete your solution -
+    // This is a placeholder to prevent Angular from failing to build.
+    return new Observable();
   }
 
   /** Deletes a timer and returns the delete action as an observable. */
   deleteTimer(id: number) {
-    return this.http.delete('/api/productivity/' + id);
+    // TODO:
+    // - Delete one TimerResponse object by calling the DELETE /api/productivity/ API
+    // - Return the result.
+
+    // Delete the line below once you complete your solution -
+    // This is a placeholder to prevent Angular from failing to build.
+    return new Observable();
   }
+
+  /********* PROVIDED FUNCTIONS: Do not modify. *********/
+
+  /**
+   * Operator function that converts a list of timer responses into a list
+   * of timer data objects.
+   */
+  private mapTimerResponseListToDataList: OperatorFunction<
+    TimerResponse[],
+    TimerData[]
+  > = map((responses) =>
+    responses.map((response) => this.timerResponseToData(response))
+  );
+
+  /**
+   * Operator function that converts a timer response object into
+   * a timer data object.
+   */
+  private mapTimerResponseToData: OperatorFunction<TimerResponse, TimerData> =
+    map(this.timerResponseToData);
 
   /**
    * Converts a `TimerResponse` object to a `TimerData` object.
