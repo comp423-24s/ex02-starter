@@ -8,7 +8,13 @@ Be sure to scan the **_entire_** full write up (especially the technical require
 
 # Setup
 
-Clone the repo.
+First, accept the assignment on GitHub Classroom, linked here.
+
+# Workflow Expectations
+
+Pair Program, ideally in person, on each of the stories. Do so in work-in-progress branches that get pushed to your team’s repository and merged back into the main branch. Each member of the pair should be the commit author for at least one of the subtasks (unless there is only 1 subtask!). You should create a branch per story and a commit per subtask completion. Once all subtasks are complete, merge the story’s commits back into stage.
+
+Once finished with a story, the “driving” partner should create a pull request for the completion of the story, and the “navigating” partner should review it and merge it into main via GitHub’s interface. Each partner should create at least two pull requests, and each partner must merge two pull requests from the other partner. For reference on pull requests see Creating a pull request and merging a pull request.
 
 # Navigating the Backend
 
@@ -178,12 +184,6 @@ Congrats! You are almost done. The final step of this exercise is to hook up our
 2. Creating or editing a timer in the `TimerEditorComponent` will call the appropriate APIs from the backend.
 3. Clicking the "Delete" timer button in the `TimerWidget` will call the correct API from the backend to delete the timer.
 4. After deleting a timer, the data of the service is also refreshed.
-
-# Workflow Expectations
-
-Pair Program, ideally in person, on each of the stories. Do so in work-in-progress branches that get pushed to your team’s repository and merged back into the main branch. Each member of the pair should be the commit author for at least one of the subtasks (unless there is only 1 subtask!). You should create a branch per story and a commit per subtask completion. Once all subtasks are complete, merge the story’s commits back into stage.
-
-Once finished with a story, the “driving” partner should create a pull request for the completion of the story, and the “navigating” partner should review it and merge it into main via GitHub’s interface. Each partner should create at least two pull requests, and each partner must merge two pull requests from the other partner. For reference on pull requests see Creating a pull request and merging a pull request.
 
 # Getting Started
 
