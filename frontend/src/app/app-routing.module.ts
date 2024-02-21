@@ -5,12 +5,16 @@ import { GateComponent } from './gate/gate.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileEditorComponent } from './profile/profile-editor/profile-editor.component';
 import { AboutComponent } from './about/about.component';
+import { ProductivityComponent } from './productivity/productivity.component';
+import { TimerEditorComponent } from './productivity/timer-editor/timer-editor.component';
 
 const routes: Routes = [
   HomeComponent.Route,
   AboutComponent.Route,
   ProfileEditorComponent.Route,
   GateComponent.Route,
+  ProductivityComponent.Route,
+  TimerEditorComponent.Route,
   {
     path: 'coworking',
     title: 'Cowork in the XL',

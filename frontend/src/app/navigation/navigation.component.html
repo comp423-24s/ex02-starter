@@ -30,6 +30,7 @@
           <a mat-list-item routerLink="/events">Events</a>
           <a mat-list-item routerLink="/organizations">Organizations</a>
           <a mat-list-item routerLink="/academics">Academics</a>
+          <a mat-list-item routerLink="/productivity">Productivity</a>
           <a mat-list-item routerLink="/about">About the XL</a>
           <mat-divider></mat-divider>
           <div *ngIf="ambassadorPermission$ | async">
@@ -54,6 +55,7 @@
         <ng-template #unauthenticated>
           <a mat-list-item routerLink="/organizations">Organizations</a>
           <a mat-list-item routerLink="/events">Events</a>
+          <a mat-list-item routerLink="/productivity">Productivity</a>
           <a mat-list-item routerLink="/about">About the XL</a>
           <a mat-list-item href="/auth?continue_to={{ router.url }}">Sign in</a>
         </ng-template>

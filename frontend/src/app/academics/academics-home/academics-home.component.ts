@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NagivationAdminGearService } from 'src/app/navigation/navigation-admin-gear.service';
 import { PermissionService } from 'src/app/permission.service';
+import { PomodoroTimer } from 'src/app/pomodoro';
 
 @Component({
   selector: 'app-academics-home',
@@ -26,6 +27,7 @@ export class AcademicsHomeComponent implements OnInit {
     canActivate: []
   };
 
+  public pomodoro = new PomodoroTimer(10, 5);
   constructor(private gearService: NagivationAdminGearService) {}
 
   ngOnInit() {

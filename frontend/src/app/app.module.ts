@@ -40,6 +40,9 @@ import { AboutComponent } from './about/about.component';
 import { GateComponent } from './gate/gate.component';
 import { ProfileEditorComponent } from './profile/profile-editor/profile-editor.component';
 import { EventFilterPipe } from './event/event-filter/event-filter.pipe';
+import { ProductivityComponent } from './productivity/productivity.component';
+import { TimerEditorComponent } from './productivity/timer-editor/timer-editor.component';
+import { TimerWidget } from './productivity/timer-widget/timer.widget';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,10 @@ import { EventFilterPipe } from './event/event-filter/event-filter.pipe';
     HomeComponent,
     AboutComponent,
     GateComponent,
-    ProfileEditorComponent
+    ProfileEditorComponent,
+    ProductivityComponent,
+    TimerEditorComponent,
+    TimerWidget
   ],
   imports: [
     /* Angular */
