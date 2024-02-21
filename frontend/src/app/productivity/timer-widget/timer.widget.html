@@ -58,7 +58,9 @@
           Pause
         </button>
       </ng-template>
-
+      <button mat-stroked-button (click)="timerData.timer.reset()">
+        Reset
+      </button>
       <div class="modify-buttons">
         <button mat-stroked-button (click)="editTimer()">Edit</button>
         <button mat-stroked-button (click)="deleteTimer()">Delete</button>
