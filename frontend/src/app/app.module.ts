@@ -27,11 +27,13 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 /* Application Specific */
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { SlackInviteBox } from './navigation/widgets/slack-invite-box/slack-invite-box.widget';
 import { ErrorDialogComponent } from './navigation/error-dialog/error-dialog.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
@@ -46,6 +48,7 @@ import { TimerWidget } from './productivity/timer-widget/timer.widget';
   declarations: [
     AppComponent,
     NavigationComponent,
+    SlackInviteBox,
     ErrorDialogComponent,
     HomeComponent,
     AboutComponent,
@@ -79,6 +82,7 @@ import { TimerWidget } from './productivity/timer-widget/timer.widget';
     MatSnackBarModule,
     MatTabsModule,
     MatToolbarModule,
+    MatCheckboxModule,
     FormsModule,
     RouterModule,
     JwtModule.forRoot({
