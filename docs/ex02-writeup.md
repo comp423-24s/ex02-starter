@@ -8,7 +8,19 @@ Be sure to scan the **_entire_** full write up (especially the technical require
 
 # Setup
 
-First, accept the assignment on GitHub Classroom, linked here.
+For this assignment, you will continue to work in your team's EX01 repository.
+
+In a terminal from the VSCode Devcontainer, let’s reconfigure our remotes
+
+A. `git remote add ex02 https://github.com/comp423-24s/ex02-starter.git` - Adds the EX02 starter code repository as a remote to your repository.
+
+B. Fetch all branches from upstream, checkout, and push to your main repository.
+
+* `get fetch --all`
+* `git checkout --track ex02/ex02-starter`
+* `git push origin ex02`
+
+From this point on, you will complete your project off of the `ex02` branch. You may branch off of `ex02` for each task, then merge back into `ex02` once completed. We will grade off of your `ex02` branch.
 
 # Workflow Expectations
 
